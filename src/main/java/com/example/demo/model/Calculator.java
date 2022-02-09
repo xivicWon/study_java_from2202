@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-public class Hello {
+public class Calculator {
 
     public int add(int x, int y) {
         return x + y;

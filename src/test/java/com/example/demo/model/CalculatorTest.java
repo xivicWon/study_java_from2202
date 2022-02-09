@@ -5,38 +5,38 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-public class HelloTest {
+public class CalculatorTest {
 
     @Test
     void testAdd() {
-        Hello hello = new Hello();
-        int result = hello.add(4, 6);
+        Calculator calculator = new Calculator();
+        int result = calculator.add(4, 6);
         Assertions.assertThat(result).isEqualTo(10);
     }
 
     @Test
     void testMinus() {
-        Hello hello = new Hello();
-        int result = hello.minus(8, 6);
+        Calculator calculator = new Calculator();
+        int result = calculator.minus(8, 6);
         Assertions.assertThat(result).isEqualTo(2);
     }
 
     @Test
     void testMulti() {
-        Hello hello = new Hello();
-        int result = hello.multi(1, 5);
+        Calculator calculator = new Calculator();
+        int result = calculator.multi(1, 5);
         Assertions.assertThat(result).isEqualTo(5);
     }
 
     @Test
     @Disabled
     void testDivide2() {
-        Hello hello = new Hello();
+        Calculator calculator = new Calculator();
         int x = 5;
         int y = 0;
 
         // when
-        Executable executable = () -> hello.divide(x, y);
+        Executable executable = () -> calculator.divide(x, y);
 
         // then
         org.junit.jupiter.api.Assertions.assertThrows(ArithmeticException.class, executable);
@@ -52,30 +52,30 @@ public class HelloTest {
 
     @Test
     void testDivide() {
-        Hello hello = new Hello();
+        Calculator calculator = new Calculator();
         int x = 5;
         int y = 5;
-        int result = hello.divide(x, y );
+        int result = calculator.divide(x, y );
 
         Assertions.assertThat(result).isEqualTo(1);
     }
 
     @Test
     void testDivideByZeroX() {
-        Hello hello = new Hello();
+        Calculator calculator = new Calculator();
         int x = 0;
         int y = 5;
-        int result = hello.divide(x, y );
+        int result = calculator.divide(x, y );
 
         Assertions.assertThat(result).isEqualTo(0);
     }
 
     @Test
     void testDivideByZeroY() {
-        Hello hello = new Hello();
+        Calculator calculator = new Calculator();
         int x = 5;
         int y = 0;
-        int result = hello.divide(x, y );
+        int result = calculator.divide(x, y );
 
         Assertions.assertThat(result).isEqualTo(0);
     }
