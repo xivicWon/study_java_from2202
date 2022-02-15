@@ -1,10 +1,36 @@
 # 자바 스터디 
 
+## 22.02.15
+- - -
+- 숙제!!
+  - findByName() 
+    _- NullPointerException 을 어떻게 사용해야 할지 몰르겠음.
+    - 기존 ID 방식과 동일하게 했으나 전체를 돌릴때 오류가 발생됨. 
+    - repository 의 데이터가 누적됨을 확인하여 초기화 해주는 AfterEach 를 추가하여 처리함.
+  - findAll() 
+    - 쉽게 처리가 됬음.
+  - ETC
+    - Test의 함수명을 영어로 하고싶고, Debug에는 한글로 보고싶을땐 @DisplayName 을 사용하면 가능함.
+    - Gradle 의 build and run 방식 intelij 로 변경해야 하고, File Encoding 에서 보이는 문자셋을 UTF-8로 해야함.
+
 ## 22.02.14
 - - -
 
+- Lombok
+  - 드디어 써봤다. 롬복
+  - @Getter 와 @Setter 를 선언하면 자동으로 해당 함수를 compliling 과정에서 생성해준다.
+- domain
+  - domain : 도메인 ( business domain ) : 업무 영역 ( web의 도메인이 x )
+- repository
+  - 기본 repository는 interface 로 만드는데, 이는 실제 연동할 대상 서비스의 종류에 따라 달라질 수 있기 때문에 interface 로 생성한다.
+  - 클래스는 Memory + [ repository class name ] 이라고 보통 naming 을 한다.
+- Optional 
+  - 특정값을 검사할때 활용하는 프레임워크(?) 여러가지 예외처리에 대한 기능들이 있는데 아직은 Basic ~!
+- List, HashMap 등등을 사용만 해봄.
 - ETC 
-  - DB ? 
+  - 숙제!
+    - findByName() , findById() 만들기.
+  
 
 
 ## 22.02.12
