@@ -1,13 +1,16 @@
 package com.example.demo.repository;
 
 import com.example.demo.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+@Repository
 public class MemoryMemberRepository implements MemberRepository{
 
     private static Map<Long , Member > store = new HashMap<>();
     private static Long sequence = 0L;
+
     // 없어도 에러는 발생되지 않음. 하지만 해주자.
     @Override
     public Member save(Member member) {

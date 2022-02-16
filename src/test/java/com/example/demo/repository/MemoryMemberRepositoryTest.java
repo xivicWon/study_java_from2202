@@ -3,6 +3,7 @@ package com.example.demo.repository;
 import com.example.demo.domain.Member;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,14 +11,14 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+//import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MemoryMemberRepositoryTest {
 
     MemoryMemberRepository memoryMemberRepository = new MemoryMemberRepository();
 
-    @AfterEach
+    @BeforeEach
     void initRepository () {
         memoryMemberRepository.clearStore();
     }
@@ -48,7 +49,7 @@ class MemoryMemberRepositoryTest {
     }
 
     @Test
-    @DisplayName("이름찾기 함수")
+    @DisplayName("사용자 조회 함수")
     void findByName(){
         //Given
         Member member = new Member();
@@ -56,10 +57,29 @@ class MemoryMemberRepositoryTest {
         memoryMemberRepository.save(member);
 
         //When
-        Optional<Member> findMember  = memoryMemberRepository.findByName(member.getName());
+        Optional<Member> findMember  = memoryMemberRepository.findByName("이승만");
         Member savedMember = findMember.orElse(null);   // Optional 은 있거나 없거나함.
 
         //Then
+        assertThat(savedMember).isEqualTo(member);
+    }
+
+
+    @Test
+    @DisplayName("존재하지 않는 사용자 조회")
+    void findUnknownByName(){
+        //Given
+        Member member = new Member();
+        member.setName("김갑수");
+        memoryMemberRepository.save(member);
+
+        //When
+        Optional<Member> findMember  = memoryMemberRepository.findByName("이승만");
+
+        //Then
+        assertThat(findMember).isPresent();
+        Member savedMember = findMember.get();
+        System.out.println("savedMember = " + savedMember);
         assertThat(savedMember).isEqualTo(member);
     }
 
