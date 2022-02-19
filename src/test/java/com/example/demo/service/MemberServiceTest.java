@@ -1,36 +1,35 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.Member;
-import org.assertj.core.api.Assertions;
+import com.example.demo.repository.MemberRepository;
+import com.example.demo.repository.MemoryMemberRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-@SpringBootTest
 class MemberServiceTest {
 
-    private final MemberService memberService;
+    private MemberService memberService;
+    private MemoryMemberRepository memoryMemberRepository;
 
     @BeforeEach
     void initMemberService(){
-        memberService.clearMember();
+        memoryMemberRepository = new MemoryMemberRepository();
+        memberService = new MemberService(memoryMemberRepository);
     }
-
-    @Autowired
-    MemberServiceTest(MemberService memberService) {
-        this.memberService = memberService;
+    @AfterEach
+    void initMemberServiceAfterEach(){
+        memoryMemberRepository.clearStore();
     }
 
 
     @Test
-    @DisplayName("회원가입 ?회원제공")
+    @DisplayName("회원가입 ?가입성공")
     void join() {
         //Given
         Member member = new Member();
@@ -41,7 +40,20 @@ class MemberServiceTest {
 
         //Then
         assertThat(memberID).isEqualTo(member.getId());
+    }
 
+    @Test
+    @DisplayName("회원가입 ?가입실패")
+    void join_Exception() {
+        //Given
+        Member member = new Member();
+        member.setName("오로라");
+
+        //When
+        Long memberID = memberService.join(member);
+
+        //Then
+        assertThat(memberID).isEqualTo(member.getId());
     }
 
     @Test
@@ -50,37 +62,29 @@ class MemberServiceTest {
 
         //Given
         Member member = new Member();
-        member.setName("오로라");
+        member.setName("A");
+        memberService.join(member);
         Member member2 = new Member();
-        member2.setName("오로라2");
-        Member member3 = new Member();
-        member3.setName("오로라3");
-        memberService.join(member);
-        memberService.join(member);
-        memberService.join(member);
+        member2.setName("B");
+        memberService.join(member2);
 
         //When
         List<Member> allMembers = memberService.getAllMembers();
 
         //Then
-        assertThat(allMembers.size()).isEqualTo(3);
-
+        assertThat(allMembers.size()).isEqualTo(2);
     }
 
     @Test
     @DisplayName("전체 회원 조회 ?회원미제공")
-    void getAllMembers_NotFound() {
-
+    void getAllMembersWhenEmpty() {
         //Given
 
         //When
         List<Member> allMembers = memberService.getAllMembers();
 
         //Then
-        assertThat(allMembers.size()).isEqualTo(0);
-
-        System.out.println("allMembers = " + allMembers);
-
+        assertThat(allMembers).isEmpty();
     }
 
     @Test
@@ -100,14 +104,14 @@ class MemberServiceTest {
 
     @Test
     @DisplayName("회원조회 ?미조회")
-    void getMember_NotFound() {
+    void getMemberNotFound() {
         //Given
         Member member = new Member();
         member.setName("돌로렌스");
         memberService.join(member);
 
         //When
-        Member findMember = memberService.getMember(2L);
+        Member findMember = memberService.getMember(300L);
 
         //Then
         assertThat(findMember).isEqualTo(null);
