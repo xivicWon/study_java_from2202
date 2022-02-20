@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.domain.Member;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.repository.MemoryMemberRepository;
+import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -46,14 +47,17 @@ class MemberServiceTest {
     @DisplayName("회원가입 ?가입실패")
     void join_Exception() {
         //Given
-        Member member = new Member();
-        member.setName("오로라");
+        Member member1 = new Member();
+        member1.setName("오로라");
+        Member member2 = new Member();
+        member2.setName("오로라");
 
         //When
-        Long memberID = memberService.join(member);
+        memberService.join(member1);
+        ThrowableAssert.ThrowingCallable throwingCallable = () -> memberService.join(member2);
 
         //Then
-        assertThat(memberID).isEqualTo(member.getId());
+        assertThatThrownBy(throwingCallable).hasMessage("중복된 이름이 있습니다.");
     }
 
     @Test
@@ -116,4 +120,11 @@ class MemberServiceTest {
         //Then
         assertThat(findMember).isEqualTo(null);
     }
+
+    @Test
+    @DisplayName("중복이름 체크")
+    void checkDuplicatedMember(){
+
+    }
+
 }
