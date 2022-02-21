@@ -44,20 +44,27 @@ class MemberServiceTest {
     }
 
     @Test
-    @DisplayName("회원가입 ?가입실패")
-    void join_Exception() {
+    @DisplayName("회원가입 ?중복이름")
+    void join_DuplicateName() {
         //Given
         Member member1 = new Member();
         member1.setName("오로라");
         Member member2 = new Member();
         member2.setName("오로라");
-
-        //When
         memberService.join(member1);
+
+        // When
         ThrowableAssert.ThrowingCallable throwingCallable = () -> memberService.join(member2);
 
-        //Then
+        // Then
         assertThatThrownBy(throwingCallable).hasMessage("중복된 이름이 있습니다.");
+
+
+        // When
+        ThrowableAssert.ThrowingCallable throwingCallable2 = () -> memberService.join(member2);
+
+        // Then
+        assertThatThrownBy(throwingCallable2).isInstanceOf(IllegalStateException.class);
     }
 
     @Test
@@ -122,9 +129,27 @@ class MemberServiceTest {
     }
 
     @Test
-    @DisplayName("중복이름 체크")
-    void checkDuplicatedMember(){
+    @DisplayName("")
+    void testString () {
+        String str1 = new String("abc");
+        String str2 = new String("abc");
+        String str3 = "abc";    // 스트링 리터럴
+        String str4 = "abc";    // 스트링 리터럴
+
+        assertThat(str1).isEqualTo(str2);
+        assertThat(str1).isNotSameAs(str3);
+        assertThat(str1).isEqualTo(str4);
+
+        assertThat(str2).isEqualTo(str3);
+        assertThat(str2).isEqualTo(str4);
+
+        assertThat(str3).isEqualTo(str4);
+
 
     }
+
+
+
+
 
 }

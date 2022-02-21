@@ -3,6 +3,7 @@ package com.example.demo.domain;
 // 도메인 ( business domain ) : 업무 영역
 // 클래스(정의) = 필드(속성) + 매서드(행위)
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,10 +13,24 @@ import lombok.Setter;
 @Getter @Setter
 public class Member {
 
-    private Long id ;
+    //Json 의 데이터가 null 이면 제외함.
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Long id ;       // Primitive Type
     private String name ;
 
-//    Alt + insert
+    public Member() {
+    }
+
+    public Member(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+
+    public Member(String name) {
+        this.name = name;
+    }
+
 //    public Long getId() {
 //        return id;
 //    }

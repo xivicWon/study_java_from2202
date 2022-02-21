@@ -39,5 +39,6 @@ public class MemoryMemberRepository implements MemberRepository{
 
     public void clearStore(){
         store.clear();
+        sequence = 0L;
     }
 }
