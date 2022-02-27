@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.Member;
+import com.example.demo.repository.JdbcMemberRepository;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.repository.MemoryMemberRepository;
 import org.assertj.core.api.ThrowableAssert;
@@ -8,26 +9,44 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
+@SpringBootTest
+@Transactional
 class MemberServiceTest {
 
+    @Autowired
     private MemberService memberService;
-    private MemoryMemberRepository memoryMemberRepository;
+
+//    private MemberService memberService;
 
     @BeforeEach
     void initMemberService(){
-        memoryMemberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memoryMemberRepository);
-    }
-    @AfterEach
-    void initMemberServiceAfterEach(){
-        memoryMemberRepository.clearStore();
+//        MemberRepository memoryMemberRepository = new MemoryMemberRepository();
+
+//        MemberRepository memoryMemberRepository = new JdbcMemberRepository();
+//        memberService = new MemberService(memoryMemberRepository);
     }
 
+    @AfterEach
+    void initMemberServiceAfterEach(){
+//        memoryMemberRepository.clearStore();
+    }
+
+    @Test
+    @DisplayName("테스트 DI")
+    void testDI () {
+        System.out.println("memberService = " + memberService);
+    }
+    
+    
 
     @Test
     @DisplayName("회원가입 ?가입성공")
@@ -48,9 +67,9 @@ class MemberServiceTest {
     void join_DuplicateName() {
         //Given
         Member member1 = new Member();
-        member1.setName("오로라");
+        member1.setName("빵꾸똥꾸");
         Member member2 = new Member();
-        member2.setName("오로라");
+        member2.setName("빵꾸똥꾸");
         memberService.join(member1);
 
         // When
@@ -61,10 +80,10 @@ class MemberServiceTest {
 
 
         // When
-        ThrowableAssert.ThrowingCallable throwingCallable2 = () -> memberService.join(member2);
+//        ThrowableAssert.ThrowingCallable throwingCallable2 = () -> memberService.join(member2);
 
         // Then
-        assertThatThrownBy(throwingCallable2).isInstanceOf(IllegalStateException.class);
+//        assertThatThrownBy(throwingCallable2).isInstanceOf(IllegalStateException.class);
     }
 
     @Test
@@ -110,7 +129,9 @@ class MemberServiceTest {
         Member findMember = memberService.getMember(member.getId());
 
         //Then
-        assertThat(findMember).isEqualTo(member);
+        System.out.println("member.getId() = " + member.getId());
+        System.out.println("findMember.getId() = " + findMember.getId());
+        assertThat(findMember.getName()).isEqualTo(member.getName());
     }
 
     @Test

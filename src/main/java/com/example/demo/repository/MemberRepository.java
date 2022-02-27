@@ -15,5 +15,13 @@ public interface MemberRepository {
 
     List<Member> findAll();
 
-    void clearStore();
+    default void clearStore(){
+
+    }
+
+    static void clearAll2(){
+
+    }
+
+
 }

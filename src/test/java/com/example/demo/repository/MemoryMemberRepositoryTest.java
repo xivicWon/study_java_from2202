@@ -64,7 +64,6 @@ class MemoryMemberRepositoryTest {
         assertThat(savedMember).isEqualTo(member);
     }
 
-
     @Test
     @DisplayName("존재하지 않는 사용자 조회")
     void findUnknownByName(){

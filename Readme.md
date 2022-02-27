@@ -1,7 +1,25 @@
 # 자바 스터디 
 
+## 22.02.27
+- H2 DB 설치 및 연결
+- Repository 여러 개 만들어보기. ( SOLID - OCP)
+- Java 1.8 에 추가된것. 
+  - ( Optional, Lambda Expression, Stream )
+  - Interface에 default, static 함수 선언 가능
+- @Component 를 포함한 애너테이션
+  - @Service
+  - @Controller
+  - @Bean
+  - @Configuration
+  - @Repository 
+- 숙제
+  - Controller에 데이터를 받아보자( 3/2 까지 )
+    - @RequestParam
+    - @PathVariable
+    - @RequestBody
+    - @ModelAttribute
+
 ## 22.02.19
-- - -
 - Stack, Heap, Static 메모리 영역에 대한 설명
 - Test 클래스에 대해 SpringBootTest 제거 및 그 이유
   - 테스트 속도가 느리다.
@@ -19,7 +37,6 @@
   - throw new 에 대한 작업 테스트. 
 
 ## 22.02.16
-- - -
 - @Service 란 ?
   - 비지니스 로직이 포함한 개념
   - 함수명이나 명칭은 가능한 비지니스에서 사용하는 단어를 사용하여 만들어야 함.
@@ -28,7 +45,6 @@
   - getMember
 
 ## 22.02.15
-- - -
 - 숙제!!
   - findByName() 
     _- NullPointerException 을 어떻게 사용해야 할지 몰르겠음.
@@ -41,7 +57,6 @@
     - Gradle 의 build and run 방식 intelij 로 변경해야 하고, File Encoding 에서 보이는 문자셋을 UTF-8로 해야함.
 
 ## 22.02.14
-- - -
 
 - Lombok
   - 드디어 써봤다. 롬복
@@ -61,7 +76,6 @@
 
 
 ## 22.02.12
-- - -
 
 - 오류 발생
   - 런타임 오류
@@ -86,5 +100,4 @@
     - 어떻게 생성이되는가?
       - @Component 에너테이션으로 인해서 
       - 런타임중에 스프링이 @Component 로 지정된 객체에 대해서는 1개씩 자동으로 Spring Bean에 생성됨.
-      - 
   

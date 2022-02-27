@@ -24,6 +24,8 @@ public class MemberService {
     @Autowired  // 생성자가 1개일 경우에는 생략이 가능하다.
     public MemberService(MemberRepository repository) {
         this.repository = repository;
+
+        System.out.println("repository = " + repository);
     }
 
     /**
