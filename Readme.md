@@ -1,5 +1,16 @@
 # 자바 스터디 
 
+## 22.03.01
+- Lambda식
+  - 변수의 종류
+    - Primitive Type : int, long, string
+    - Wrapper Type : Int, Long, String
+    - Reference Type : etc
+  - this를 활용하면서 lambda 의 변수형식을 확인.
+  - 클래스 객체와는 다른 형식으로 생성됨. $1 ... 
+  - @FunctionalInterface 을 사용함으로서 lambda 형식 interface 생성
+  - 메소드 레퍼런스형식으로도 간추릴 수 있다.
+
 ## 22.02.27
 - H2 DB 설치 및 연결
 - Repository 여러 개 만들어보기. ( SOLID - OCP)
