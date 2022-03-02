@@ -17,7 +17,7 @@ public class Member {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long id ;       // Primitive Type
     private String name ;
-
+    public String noname;
     public Member() {
     }
 

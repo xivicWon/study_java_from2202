@@ -1,10 +1,79 @@
 package com.example.demo.controller;
 
 
-import org.springframework.web.bind.annotation.RestController;
+import com.example.demo.domain.Member;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MemberController {
 
+    /**
+     * 유입된 모든 Param 을 입력받는 방식
+     * TEST URL GET http://localhost:8080/member/requestParam?name=tt&age=12&ho=10
+     */
+    @GetMapping(value="/member/basic")
+//    @RequestMapping(value="/member/basic" , method=RequestMethod.GET ) @GetMapping 과 동일
+    // 파라미터 인자가 없는경우는 @RequestParam 이 생략된 것과 동일하다.
+    public String basic(String name, Integer age, String ho){
+        System.out.println("name = " + name);
+        System.out.println("age = " + age);
+        System.out.println("ho = " + ho);
+        return "basic";
+    }
 
+    /**
+     * <code>@RequestParam</code> 은 URL 경로에서 QueryString 내역중에 RequestParam으로 지정된 파라미터만 받는다.<br>
+     * 1:1맵핑된다.<br>
+     * TEST URL GET http://localhost:8080/member/requestParam?name=tt&age=12&ho=10
+     * 문제 : 
+     *  - required 를 true 로 했는데, 인자가 없어도 문제가 발생안됨..>> defaultValue 가 있으면 문제되지않음. 즉 DefaultValue 가 있으면, required 는 무용이됨.
+     */
+    @GetMapping(value="/member/requestParam")
+    public String requestParam(@RequestParam(value="name", required=false) String name,
+                               @RequestParam(value="age", required=false, defaultValue="0") Integer age){
+        System.out.println("@RequestParam");
+        System.out.println("name = " + name);
+        System.out.println("age = " + age);
+        return "requestParam";
+    }
+
+    /**
+     * <code>@PathVariable</code> 는 URL 경로에서 특정위치의 데이터를 받아서 사용하는 방식<br>
+     * TEST URL GET http://localhost:8080/member/testID
+     */
+    @RequestMapping(value="/member/{userId}", method=RequestMethod.GET)
+    public String pathVariable(@PathVariable String userId) {
+        System.out.println("@PathVariable");
+        System.out.println("userId = " + userId);
+        return "pathVariable";
+    }
+
+
+    /**
+     * <code>@RequestBody</code> 는 POST로 전달되는 form data 의 데이터를 문자열로 받는 방식<br>
+     * TEST URL POST http://localhost:8080/member/requestBody
+     * Form-data {name=tt,age=12,ho=10}
+     * >>> req = name=tt&name=tt&age=12&age=12&ho=10&ho=10
+     */
+    @PostMapping(value="/member/requestBody")
+    public String requestBody(@RequestBody String req){
+        System.out.println("@RequestBody");
+        System.out.println("req = " + req);
+        return "requestBody";
+    }
+
+
+    /**
+     * <code>@ModelAttribute</code> 는 데이터를 특정 클래스의 형식에 맞게 받는 방식 (클래스객체에 포함되지 않는 필드는 제외됨.)<br>
+     * 해당 클래스의 필드에 접근 또는 getter, setter 가 가능한 필드에 대해 매칭되어 할당됨.
+     * TEST URL GET http://localhost:8080/member/modelAttribute?name=tt&id=12
+     */
+    @GetMapping(value="/member/modelAttribute")
+    public String modelAttribute(@ModelAttribute Member member ) {
+        System.out.println("@ModelAttribute");
+        System.out.println("member.id = " + member.getId());
+        System.out.println("member.name = " + member.getName());
+        System.out.println("member.noname = " + member.noname);
+        return "modelAttribute";
+    }
 }
