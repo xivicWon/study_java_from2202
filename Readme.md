@@ -1,7 +1,26 @@
 # 자바 스터디 
 
+## 22.03.03
+- Lambda식 2차 
+  - Runnable
+    - 실행만 가능함.
+  - Customer
+    - accept 사용
+    - 인자값을 전달만 할 수 있음.
+  - Supplier
+    - get 사용
+    - 제공만 할 수 있음.
+  - Function
+    - 인자를 입력받아 반환해야함.
+  - 정적 팩토리 메소드 
+    - 정적으로 메소드를 생산해내는 ?? 뭐 그런뜻 이라는데 .. 
+- 숙제
+  - Optional 블로그 자료(3개) 실습해오기 (#자료-java 채널 참고)
+    함수형 인터페이스 블로그 자료도 실습해 오기
+  - 참고 : https://codechacha.com/ko/java8-functional-interface/
+
 ## 22.03.01
-- Lambda식
+- Lambda식 1차
   - 변수의 종류
     - Primitive Type : int, long, string
     - Wrapper Type : Int, Long, String
