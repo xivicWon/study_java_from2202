@@ -1,5 +1,20 @@
 # 자바 스터디 
 
+## 22.03.05
+- @PathVariable
+  - URL 주소의 특정부분에 대한 값을 파싱하여 파라미터 필드에 매칭.
+- @RequestParam
+  - Query에 해당하는 데이터를 파싱하여 파라미터 필드에 매칭
+- @ModelAttribute
+  - RequestParam 과 비슷하나 받는 인자를 클래스객체에 할당하는 방식
+  - 클래스 객체에는 Getter, Setter 가 설정되어있어야 함.
+- @RequestBody
+  - Body로 전달되어온 데이터를 파싱하여 설정된 파라미터 필드에 매칭
+  - 파라미터 필드가 클래스객체여도 Getter, Setter 가 설정되어있으면 맞춰서 등록된다.
+  - 데이터를 받는 방식만 Body로 바꼈고 RequestParam 과 ModelAttribute 의 기능을 두루 갖고있다.
+- 숙제 
+  - Facade Pattern 공부하기 : Code Level 로 작성해오기
+
 ## 22.03.03
 - Lambda식 2차 
   - Runnable

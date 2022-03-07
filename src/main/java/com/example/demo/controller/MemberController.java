@@ -2,10 +2,70 @@ package com.example.demo.controller;
 
 
 import com.example.demo.domain.Member;
+import com.example.demo.dto.MemberDto;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
+
+/**
+ * Simple Logging Facade For Java
+ * Facade Pattern 공부하기 : Code Level 로 작성해오기
+ * Slf4j : 명세, 스팩, 규격, 인터페이스
+ * -> 구현체 = log4j, log4j2, logback(default)
+ */
+@Slf4j
 @RestController
 public class MemberController {
+
+    @GetMapping("/demo/path-variable/{name}")
+    public String pathVariable2(@PathVariable String name) {
+        log.info("name : {}" , name);
+        return "Ok";
+    }
+
+    @GetMapping("/demo/servlet-param")
+    public String servletParam2(HttpServletRequest request) {
+        log.info("name : {}" , request.getParameter("name"));
+        log.info("email : {}" , request.getParameter("email"));
+        return "Ok";
+    }
+
+    @GetMapping("/demo/request-param")
+    public String requestParam2(@RequestParam(required = true, defaultValue = "10") String name,
+                                @RequestParam String email) {
+        log.info("name : {}" , name);
+        log.info("email : {}" , email);
+        return "Ok";
+    }
+
+    @GetMapping("/demo/model-attribute")
+    public String modelAttribute2(@ModelAttribute MemberDto memberDto){
+        log.info("memberDto : {}" , memberDto );
+        return "Ok";
+    }
+
+    @PostMapping(value = "/demo/request-body/string")
+    public String requestBody2(@RequestBody String body){
+        log.info("body : {}" , body );
+        return "Ok";
+    }
+
+    @PostMapping(value = "/demo/request-body/parameter")
+    public String requestBody3(@ModelAttribute MemberDto memberDto){
+        log.info("memberDto : {}" , memberDto );
+        return "Ok";
+    }
+
+    @PostMapping(value = "/demo/request-body/object")
+    public String requestBody4(@RequestBody MemberDto memberDto ){
+        log.info("memberDto : {}" , memberDto );
+        return "Ok";
+    }
 
     /**
      * 유입된 모든 Param 을 입력받는 방식
@@ -59,6 +119,14 @@ public class MemberController {
     public String requestBody(@RequestBody String req){
         System.out.println("@RequestBody");
         System.out.println("req = " + req);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            MemberDto memberDto = objectMapper.readValue(req, MemberDto.class);
+            log.info("memberDto >> {} " + memberDto );
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
         return "requestBody";
     }
 
