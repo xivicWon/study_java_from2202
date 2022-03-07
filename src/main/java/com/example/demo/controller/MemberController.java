@@ -20,22 +20,23 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Slf4j
 @RestController
+@RequestMapping("/demo")
 public class MemberController {
 
-    @GetMapping("/demo/path-variable/{name}")
+    @GetMapping("/path-variable/{name}")
     public String pathVariable2(@PathVariable String name) {
         log.info("name : {}" , name);
         return "Ok";
     }
 
-    @GetMapping("/demo/servlet-param")
+    @GetMapping("/servlet-param")
     public String servletParam2(HttpServletRequest request) {
         log.info("name : {}" , request.getParameter("name"));
         log.info("email : {}" , request.getParameter("email"));
         return "Ok";
     }
 
-    @GetMapping("/demo/request-param")
+    @GetMapping("/request-param")
     public String requestParam2(@RequestParam(required = true, defaultValue = "10") String name,
                                 @RequestParam String email) {
         log.info("name : {}" , name);
@@ -43,25 +44,25 @@ public class MemberController {
         return "Ok";
     }
 
-    @GetMapping("/demo/model-attribute")
+    @GetMapping("/model-attribute")
     public String modelAttribute2(@ModelAttribute MemberDto memberDto){
         log.info("memberDto : {}" , memberDto );
         return "Ok";
     }
 
-    @PostMapping(value = "/demo/request-body/string")
+    @PostMapping(value = "/request-body/string")
     public String requestBody2(@RequestBody String body){
         log.info("body : {}" , body );
         return "Ok";
     }
 
-    @PostMapping(value = "/demo/request-body/parameter")
+    @PostMapping(value = "/request-body/parameter")
     public String requestBody3(@ModelAttribute MemberDto memberDto){
         log.info("memberDto : {}" , memberDto );
         return "Ok";
     }
 
-    @PostMapping(value = "/demo/request-body/object")
+    @PostMapping(value = "/request-body/object")
     public String requestBody4(@RequestBody MemberDto memberDto ){
         log.info("memberDto : {}" , memberDto );
         return "Ok";
@@ -141,7 +142,6 @@ public class MemberController {
         System.out.println("@ModelAttribute");
         System.out.println("member.id = " + member.getId());
         System.out.println("member.name = " + member.getName());
-        System.out.println("member.noname = " + member.noname);
         return "modelAttribute";
     }
 }

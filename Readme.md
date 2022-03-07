@@ -1,4 +1,17 @@
 # 자바 스터디 
+## 22.03.07
+- JPA 
+  - Slf4j와 같이 명세, 스팩, 규격, 인터페이스 가 정의된 형태로 구현체를 만들어야 함.
+  - 구현체의 종류는 다양하고 그중 hibernate 를 사용
+  - application.yml 에 설정을 함.
+  - Conext Path 의 설정방법
+    - application.yml ( server.sevlet.context-path )
+    - 클래스에 @RequestMapping 설정
+    - 클래스 함수에 @RequestMapping 또는 @GetMapping @PostMapping 으로 설정함.
+  - JPA 는 EntityManager 를 받아서 사용하고, 보통 내장된 객체를 사용함으로써 쉽게 사용이 가능함.
+  - SpringDataJpaMemberRepository 가 어떻게 실행되는지 그 구조가 아리송하다... 
+- 숙제
+  - FindById, findAll, findByName 에 대해서 try-with-resource 적용.
 
 ## 22.03.05
 - @PathVariable
@@ -14,6 +27,7 @@
   - 데이터를 받는 방식만 Body로 바꼈고 RequestParam 과 ModelAttribute 의 기능을 두루 갖고있다.
 - 숙제 
   - Facade Pattern 공부하기 : Code Level 로 작성해오기
+  - 패턴의 특징과 장단점 ( 3/12 까지 ) 
 
 ## 22.03.03
 - Lambda식 2차 

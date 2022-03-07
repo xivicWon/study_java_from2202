@@ -18,10 +18,4 @@ public interface MemberRepository {
     default void clearStore(){
 
     }
-
-    static void clearAll2(){
-
-    }
-
-
 }
