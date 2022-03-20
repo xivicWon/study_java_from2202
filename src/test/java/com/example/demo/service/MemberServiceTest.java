@@ -24,13 +24,11 @@ class MemberServiceTest {
 
     @Autowired
     private MemberService memberService;
-
 //    private MemberService memberService;
 
     @BeforeEach
     void initMemberService(){
 //        MemberRepository memoryMemberRepository = new MemoryMemberRepository();
-
 //        MemberRepository memoryMemberRepository = new JdbcMemberRepository();
 //        memberService = new MemberService(memoryMemberRepository);
     }
@@ -45,8 +43,6 @@ class MemberServiceTest {
     void testDI () {
         System.out.println("memberService = " + memberService);
     }
-    
-    
 
     @Test
     @DisplayName("회원가입 ?가입성공")
@@ -54,16 +50,15 @@ class MemberServiceTest {
         //Given
         Member member = new Member();
         member.setName("오로라");
-
         //When
         Long memberID = memberService.join(member);
-
         //Then
         assertThat(memberID).isEqualTo(member.getId());
     }
 
     @Test
     @DisplayName("회원가입 ?중복이름")
+    @Rollback(false)
     void join_DuplicateName() {
         //Given
         Member member1 = new Member();

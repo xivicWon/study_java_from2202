@@ -37,6 +37,16 @@ public class MemoryMemberRepository implements MemberRepository{
         return new ArrayList<>(store.values());
     }
 
+    @Override
+    public Boolean dormant(Member member) {
+        return null;
+    }
+
+    @Override
+    public Boolean out(Member member) {
+        return null;
+    }
+
 
     @Override
     public void clearStore(){

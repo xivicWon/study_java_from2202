@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 // 필드 vs 프로퍼티
@@ -30,7 +31,7 @@ public class Member {
 
     //Json 의 데이터가 null 이면 제외함.
     //@JsonInclude(JsonInclude.Include.NON_NULL)
-    @Id @GeneratedValue()
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;       // Primitive Type
     private String name ;
 

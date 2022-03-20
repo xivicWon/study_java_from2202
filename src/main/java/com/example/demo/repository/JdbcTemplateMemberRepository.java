@@ -46,6 +46,16 @@ public class JdbcTemplateMemberRepository implements MemberRepository {
         return jdbcTemplate.query("SELECT * FROM member", memberRowMapper());
     }
 
+    @Override
+    public Boolean dormant(Member member) {
+        return null;
+    }
+
+    @Override
+    public Boolean out(Member member) {
+        return null;
+    }
+
     private RowMapper<Member> memberRowMapper() {
         return (rs, i) -> {
             Member member = new Member();

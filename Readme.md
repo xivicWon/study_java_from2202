@@ -1,4 +1,14 @@
 # 자바 스터디 
+## 22.03.14
+- Facade 
+
+- Interface 를 사용하는것에 대한 기준.?
+  - 자주 변할 것 같은 클래스에 대해서 쉽게 변경을 하기 위해 사용한다.
+- 
+
+- 숙제 
+  - 
+
 ## 22.03.07
 - JPA 
   - Slf4j와 같이 명세, 스팩, 규격, 인터페이스 가 정의된 형태로 구현체를 만들어야 함.
@@ -11,7 +21,7 @@
   - JPA 는 EntityManager 를 받아서 사용하고, 보통 내장된 객체를 사용함으로써 쉽게 사용이 가능함.
   - SpringDataJpaMemberRepository 가 어떻게 실행되는지 그 구조가 아리송하다... 
 - 숙제
-  - FindById, findAll, findByName 에 대해서 try-with-resource 적용.
+  - findById, findAll, findByName 에 대해서 try-with-resource 적용.
 
 ## 22.03.05
 - @PathVariable

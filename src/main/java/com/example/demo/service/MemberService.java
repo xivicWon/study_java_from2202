@@ -2,11 +2,14 @@ package com.example.demo.service;
 
 import com.example.demo.domain.Member;
 import com.example.demo.repository.MemberRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
+@Slf4j
 @Service
 public class MemberService {
 
@@ -24,8 +27,6 @@ public class MemberService {
     @Autowired  // 생성자가 1개일 경우에는 생략이 가능하다.
     public MemberService(MemberRepository repository) {
         this.repository = repository;
-
-        System.out.println("repository = " + repository);
     }
 
     /**
@@ -39,7 +40,9 @@ public class MemberService {
     }
 
     private void checkDuplicatedMember(Member member) {
-        if (repository.findByName(member.getName()).isPresent()) {
+        Optional<Member> byName = repository.findByName(member.getName());
+        if (byName.isPresent()) {
+            log.info("발생됨.");
             throw new IllegalStateException("중복된 이름이 있습니다.");
         }
     }
